@@ -1,8 +1,9 @@
-#include "check.h"
+#include "../header/common.h"
 
 void printArray( int *target, int length ) {
 	for ( int i=0; i<length; i++ )
-		printf("%d\n",target [i]);
+		printf("%d,",target [i]);
+	puts("");
 }
 
 int readArray ( int *target,int *size,char *filename ) {
@@ -16,7 +17,7 @@ int readArray ( int *target,int *size,char *filename ) {
                 fclose( fp );
                 return 0;
         }
-        printf("ERROR:%s",strerror(errno));
+        printf("ERROR:%s\n",strerror(errno));
         exit(1);
 }
 

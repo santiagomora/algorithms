@@ -12,10 +12,10 @@ int addrepeated ( int *dest,int *pos,int ctr,int pv ) {
 	for ( k=0; k<ctr; k++ ){
 		swap( &dest[j++],&dest[pos[k]] );
 	}
-	return pv+k;
+	return ctr;
 }
 
-int findpivot ( int *target, int len, int *posrep  ) {
+int partition ( int *target, int len, int *posrep  ) {
 	int i=1,
 	    repctr=0,
 	    pivot=target[0],
@@ -28,17 +28,21 @@ int findpivot ( int *target, int len, int *posrep  ) {
 	}
 	rep = realloc( rep,sizeof( int )*repctr );
 	swap ( &target[i-1],&target[0] );
-	*posrep = repctr>0 ? addrepeated( target,rep,repctr,i ) : repctr;
+	*posrep += repctr>0 ? addrepeated( target,rep,repctr,i ) : 0;
 	return i;
 }
 
-int* quicksort ( int *target,int len ) {
-	int pv,posrep;
+int randomselect ( int *target,int order,int len ) {
+	int pv,posrep=0;
 	if ( len>1 && target ) {
-		pv = findpivot( target,len,&posrep );
-		quicksort( target,pv );
-		pv = posrep>0 ? posrep : pv;
-		quicksort( target+pv,len-pv );
+		pv = partition( target,len,&posrep );
+
+		if ( order==pv-1 )
+			return target[pv-1];
+		else if ( order<pv-1 )
+			return randomselect( target,order,pv );
+		pv+=posrep;
+		if ( order>pv-1 )
+			return randomselect( target+pv,order-pv,len-pv );
 	}
-	return target;
 }

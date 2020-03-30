@@ -1,7 +1,7 @@
 head=headers.h
-src=$(wildcard *.c) 
+src=$(wildcard *.c) ../libs/common/common.c
 res=select
-flags=-Wl,-rpath,../libs/common/ver -L../libs -lcommon 
+flags=-Wl,-rpath,../libs/sort/ver -L../libs -lsort 
 
 main: $(src) $(head)
 	gcc  -o $(res) $(src) $(flags)

@@ -1,5 +1,4 @@
-#include "../libs/header/common.h"
-#include "../libs/header/mergesort.h"
+#include "common.h"
 #ifndef ARRAY
 	#define ARRAY
 		struct array {

@@ -6,11 +6,11 @@ int main ( int arc,char *arv[] ) {
 	    size,
 	    *target = malloc( sizeof( int )*MAXSZ ),
 	    result;
-	char filename[] = "RandomSelect.txt";
+	char filename[] = "DetSelect.txt";
 	if ( arc>1 ) {
 		readArray( target,&size,filename );
 		order = atoi( arv[1] );
-		if ( order<size && order>0 && ( result = randomselect( target,order-1,size ) )>=0 ) {
+		if ( order<size && order>0 && ( result = detselect( target,order-1,size,0 ) )>=0 ) {
 			printf("The %dth order statistic is:%d\n",order,result);
 			exit(0);
 		}
